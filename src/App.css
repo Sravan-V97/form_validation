@@ -37,30 +37,7 @@
   }
 }
 
-* {
-  font-size: 12px;
-}
-
-.formborder {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  /* border: 1px solid black; */
-  margin-top: 0.2rem;
-  padding: 3rem;
-  border-radius: 20px;
-}
-
-.submit {
-  float: right;
-  margin-top: 8px !important;
-}
-
-.backlogin {
-  height: 50px;
-  display: flex;
-  margin-top: 20px !important;
-  vertical-align: middle;
-}
-
-.link {
-  align-self: center;
+body {
+  min-height: 100vh;
+  background-color: white !important;
 }

@@ -28,9 +28,48 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+
   grid: { paddingBottom: "0 !important", paddingTop: "0 !important" },
 
-  subhead: { paddingBottom: 20, paddingTop: 10 },
+  subhead: { paddingBottom: 20, paddingTop: 10, fontSize: 16 },
+
+  mainhead: { fontSize: 24 },
+
+  logo: { width: 40 },
+
+  formborder: {
+    borderStyle: "solid",
+    paddingLeft: "3rem",
+    paddingRight: "3rem",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+    borderRadius: 15,
+    borderColor: "#e8e8e8",
+  },
+
+  container: {
+    maxWidth: 555,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+  },
+
+  submit: {
+    float: "right",
+    marginTop: 8,
+  },
+
+  backlogin: {
+    height: 50,
+    display: "flex",
+    marginTop: 20,
+    verticalAlign: "middle",
+  },
+
+  link: { alignSelf: "center" },
+
+  pswd: { fontSize: 14 },
 }));
 
 const validationSchema = yup.object({
@@ -90,17 +129,17 @@ function FormValid() {
     },
   });
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" className={classes.container}>
       <CssBaseline />
-      <div className="formborder">
+      <div className={classes.formborder}>
         <div className={classes.avatar}>
-          <img src={Logo} />
+          <img src={Logo} className={classes.logo} />
         </div>
-        <Typography component="h1" variant="h5" color="primary">
+        <Typography variant="h5" color="primary" className={classes.mainhead}>
           Putracare
         </Typography>
-        <Typography component="h1" variant="h6" className={classes.subhead}>
-          SignUp
+        <Typography variant="h6" className={classes.subhead}>
+          Sign Up
         </Typography>
         <form className="form" noValidate>
           <Grid container spacing={2}>
@@ -108,6 +147,9 @@ function FormValid() {
               <TextField
                 InputProps={{
                   className: classes.input,
+                }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
                 }}
                 autoComplete="name"
                 name="name"
@@ -128,6 +170,9 @@ function FormValid() {
                 InputProps={{
                   className: classes.input,
                 }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
+                }}
                 variant="outlined"
                 fullWidth
                 id="passport"
@@ -135,7 +180,6 @@ function FormValid() {
                 name="passport"
                 autoComplete="passport_id"
                 margin="dense"
-                type="number"
                 value={formik.values.passport}
                 onChange={formik.handleChange}
                 error={
@@ -148,6 +192,9 @@ function FormValid() {
               <TextField
                 InputProps={{
                   className: classes.input,
+                }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
                 }}
                 autoComplete="city"
                 name="city"
@@ -167,6 +214,9 @@ function FormValid() {
               <TextField
                 InputProps={{
                   className: classes.input,
+                }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
                 }}
                 autoComplete="number"
                 name="number"
@@ -188,6 +238,9 @@ function FormValid() {
                 InputProps={{
                   className: classes.input,
                 }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
+                }}
                 variant="outlined"
                 fullWidth
                 id="email"
@@ -207,6 +260,9 @@ function FormValid() {
                 InputProps={{
                   className: classes.input,
                 }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
+                }}
                 variant="outlined"
                 margin="dense"
                 value={formik.values.password}
@@ -215,7 +271,10 @@ function FormValid() {
                   formik.touched.password && Boolean(formik.errors.password)
                 }
               >
-                <InputLabel htmlFor="outlined-adornment-password">
+                <InputLabel
+                  htmlFor="outlined-adornment-password"
+                  className={classes.pswd}
+                >
                   Password
                 </InputLabel>
                 <OutlinedInput
@@ -250,6 +309,9 @@ function FormValid() {
                 InputProps={{
                   className: classes.input,
                 }}
+                InputLabelProps={{
+                  style: { fontSize: 14 },
+                }}
                 variant="outlined"
                 fullWidth
                 name="confirmpassword"
@@ -277,13 +339,13 @@ function FormValid() {
               type="submit"
               variant="contained"
               color="primary"
-              className="submit"
+              className={classes.submit}
               onClick={formik.handleSubmit}
             >
-              Sign Up
+              Register
             </Button>
-            <Grid item className="backlogin">
-              <Link className="link" href="#" variant="body2">
+            <Grid item className={classes.backlogin}>
+              <Link className={classes.link} href="#" variant="body2">
                 Back to Login
               </Link>
             </Grid>
