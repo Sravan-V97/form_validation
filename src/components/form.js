@@ -17,9 +17,11 @@ import {
   OutlinedInput,
   Typography,
   FormHelperText,
+  Snackbar,
 } from "@material-ui/core";
-
+import axios from "axios";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -38,13 +40,9 @@ const useStyles = makeStyles((theme) => ({
   logo: { width: 40 },
 
   formborder: {
-    borderStyle: "solid",
-    paddingLeft: "3rem",
-    paddingRight: "3rem",
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
+    border: "1px solid #e8e8e8",
+    padding: "1rem 3rem",
     borderRadius: 15,
-    borderColor: "#e8e8e8",
   },
 
   container: {
@@ -58,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     float: "right",
     marginTop: 8,
+    boxShadow: "none",
   },
 
   backlogin: {
@@ -89,7 +88,7 @@ const validationSchema = yup.object({
     .required("Password is required"),
   passport: yup
     .string("Enter your passport id")
-    .min("Enter a valid passport id")
+    .min(8, "Enter a valid passport id")
     .required("Passport id is required"),
   confirmpassword: yup
     .string("Enter your password")
@@ -113,6 +112,20 @@ function FormValid() {
     event.preventDefault();
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  const openAlert = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -125,11 +138,33 @@ function FormValid() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      axios
+        .post("https://60275261dd4afd001754a73e.mockapi.io/api/signin", values)
+        .then((response) => {
+          console.log(response);
+          openAlert();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   });
   return (
     <Container component="main" className={classes.container}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success" variant="filled">
+          Registration Sucessful
+        </Alert>
+      </Snackbar>
       <CssBaseline />
       <div className={classes.formborder}>
         <div className={classes.avatar}>
